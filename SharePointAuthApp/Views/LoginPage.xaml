@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SharePointAuthApp.ViewModels"
+             x:Class="SharePointAuthApp.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             BackgroundColor="#F3F4F6">
+
+    <ScrollView ContentContainerThickness="20" VerticalOptions="CenterAndExpand">
+        <VerticalStackLayout Spacing="0" VerticalOptions="Center">
+
+            <!-- Logo Card -->
+            <Border StrokeThickness="0"
+                    StrokeShape="RoundRectangle 24"
+                    BackgroundColor="White"
+                    Padding="30,40,30,40"
+                    Margin="16,24,16,24"
+                    MaximumWidthRequest="450"
+                    HorizontalOptions="CenterAndExpand">
+                
+                <VerticalStackLayout Spacing="20">
+                    <!-- Stylized App Logo -->
+                    <Border HeightRequest="80" 
+                            WidthRequest="80" 
+                            StrokeShape="RoundRectangle 40" 
+                            BackgroundColor="#512BD4" 
+                            StrokeThickness="0" 
+                            HorizontalOptions="Center" 
+                            Margin="0,0,0,10">
+                        <Label Text="🔑" 
+                               FontSize="36" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <Label Text="Secure Access" 
+                           FontSize="24" 
+                           FontAttributes="Bold" 
+                           TextColor="#111827" 
+                           HorizontalOptions="Center" />
+                    
+                    <Label Text="Sign in to your SharePoint account" 
+                           FontSize="14" 
+                           TextColor="#6B7280" 
+                           HorizontalOptions="Center" 
+                           Margin="0,-12,0,10" />
+
+                    <!-- Username Field -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Username" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="#374151" />
+                        <Border Stroke="#D1D5DB"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="12,2"
+                                BackgroundColor="White">
+                            <Entry Placeholder="Enter your username" 
+                                   Text="{Binding Username}" 
+                                   Keyboard="Email" 
+                                   TextColor="#1F2937"
+                                   PlaceholderColor="#9CA3AF"
+                                   ReturnType="Next"
+                                   HeightRequest="44"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Password Field -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Password" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="#374151" />
+                        <Border Stroke="#D1D5DB"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="12,2"
+                                BackgroundColor="White">
+                            <Entry Placeholder="Enter your password" 
+                                   Text="{Binding Password}" 
+                                   IsPassword="True" 
+                                   TextColor="#1F2937"
+                                   PlaceholderColor="#9CA3AF"
+                                   ReturnType="Done"
+                                   HeightRequest="44"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Error Message Display -->
+                    <Border StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            BackgroundColor="#FEF2F2"
+                            Padding="12"
+                            IsVisible="{Binding HasError}"
+                            Margin="0,5,0,5">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="⚠️" FontSize="16" VerticalOptions="Center" />
+                            <Label Text="{Binding ErrorMessage}" 
+                                   TextColor="#991B1B" 
+                                   FontSize="13" 
+                                   LineBreakMode="WordWrap"
+                                   MaxLines="3"
+                                   VerticalOptions="Center"
+                                   WidthRequest="280"/>
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Login Button -->
+                    <Button Text="Login" 
+                            Command="{Binding LoginCommand}" 
+                            BackgroundColor="#512BD4" 
+                            TextColor="White" 
+                            HeightRequest="48"
+                            CornerRadius="8" 
+                            FontAttributes="Bold" 
+                            FontSize="16"
+                            IsEnabled="{Binding IsNotBusy}"
+                            Margin="0,10,0,0"/>
+
+                    <!-- Loading Indicator overlay/spacing -->
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                                       IsVisible="{Binding IsBusy}" 
+                                       Color="#512BD4" 
+                                       HeightRequest="30" 
+                                       WidthRequest="30" 
+                                       HorizontalOptions="Center" 
+                                       Margin="0,10,0,0" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
